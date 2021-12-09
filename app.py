@@ -16,7 +16,7 @@ y = [120, 260, 380]
 
 model.fit(X, y)
 
-joblib.dump(model, './test_model/linear_model.joblib')
+joblib.dump(model, 'linear_model_2.joblib')
 y_predict = model.predict([[10]])
 
 print(y_predict[0])
