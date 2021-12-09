@@ -6,24 +6,37 @@ from sklearn.linear_model import LinearRegression
 
 model = LinearRegression()
 
-X = [
-  [1],
-  [2],
-  [3]
-]
 
-y = [120, 260, 380]
+def train_and_export_model():
+    X = [
+      [1],
+      [2],
+      [3],
+      [10],
+      [32]
+    ]
 
-model.fit(X, y)
+    y = [120, 260, 380, 3029, 9032]
 
-joblib.dump(model, 'linear_model_2.joblib')
-y_predict = model.predict([[10]])
+    model.fit(X, y)
 
-print(y_predict[0])
-# github_url = "https://github.com/remicarette/test_model/blob/main/model.joblib?raw=true"
+    y_predict = model.predict([[10]])
 
-# mfile = BytesIO(requests.get(github_url).content)
-# model = pickle.load(mfile)
+    print(y_predict[0])
+    filepath = 'linear_model_2.joblib'
+    joblib.dump(model, filepath)
+    print(f'export to {filepath}')
 
-# print(model)
+def import_form_github_and_predict():
+    # joblib.load()
+    url = "https://github.com/remicarette/test_model/blob/main/linear_model_2.joblib?raw=true"
+    mfile = BytesIO(requests.get(url).content)
+    model = joblib.load(mfile)
+    print(model)
+    y_predict = model.predict([[10]])
 
+    print(y_predict[0])
+
+
+train_and_export_model()
+# import_form_github_and_predict()
